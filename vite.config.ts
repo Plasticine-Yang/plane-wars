@@ -12,5 +12,18 @@ export default defineConfig({
       '@': resolve(root, 'src'),
     },
   },
-  plugins: [vue()],
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => {
+            const customElements = ['Container', 'Sprite'];
+            if (customElements.includes(tag)) return true;
+
+            return false;
+          },
+        },
+      },
+    }),
+  ],
 });

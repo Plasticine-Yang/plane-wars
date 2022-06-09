@@ -27,9 +27,14 @@ const { createApp } = createRenderer<Container, Container>({
     nextValue: any
   ): void {
     switch (key) {
+      // 需要特殊处理的属性则在 case 中分别处理
       case 'texture':
         // nextValue 是新传入的 prop 值
         (el as Sprite).texture = Texture.from(nextValue);
+        break;
+      default:
+        // 普通属性直接在这里赋值
+        (el as any)[key] = nextValue;
         break;
     }
   },
@@ -68,7 +73,7 @@ const { createApp } = createRenderer<Container, Container>({
     return node.parent;
   },
   nextSibling: function (node: Container): Container | null {
-    throw new Error('Function not implemented.');
+    return null;
   },
 });
 
