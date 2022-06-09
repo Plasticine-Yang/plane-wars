@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/node': ^17.0.41
   '@vitejs/plugin-vue': ^2.3.3
   pixi.js: ^6.4.2
   typescript: ^4.5.4
@@ -14,6 +15,7 @@ dependencies:
   vue: 3.2.37
 
 devDependencies:
+  '@types/node': 17.0.41
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.10+vue@3.2.37
   typescript: 4.7.3
   vite: 2.9.10
@@ -485,6 +487,10 @@ packages:
   /@types/earcut/2.1.1:
     resolution: {integrity: sha512-w8oigUCDjElRHRRrMvn/spybSMyX8MTkKA5Dv+tS1IE/TgmNZPqUYtvYBXGY8cieSE66gm+szeK+bnbxC2xHTQ==}
     dev: false
+
+  /@types/node/17.0.41:
+    resolution: {integrity: sha512-xA6drNNeqb5YyV5fO3OAEsnXLfO7uF0whiOfPTz5AeDo8KeZFmODKnvwPymMNO8qE/an8pVY/O50tig2SQCrGw==}
+    dev: true
 
   /@types/offscreencanvas/2019.7.0:
     resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
