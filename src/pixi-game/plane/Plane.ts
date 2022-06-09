@@ -1,3 +1,6 @@
+export const PLANE_WIDTH = 110;
+export const PLANE_HEIGHT = 98;
+
 export class Plane {
   x: number;
   y: number;
