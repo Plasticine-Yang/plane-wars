@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { EnemyPlane } from './EnemyPlane';
 import { Plane } from './Plane';
 
 describe('Plane', () => {
@@ -80,5 +81,20 @@ describe('Plane', () => {
 
     // 调用每个被创建的计时器
     vi.runAllTimers();
+  });
+});
+
+describe('EnemyPlane', () => {
+  it('move', () => {
+    // create a simple enemyPlane
+    const enemyPlane = new EnemyPlane(50, 0, {
+      height: 100,
+      width: 100,
+      speed: 5,
+    });
+
+    enemyPlane.move();
+
+    expect(enemyPlane.y).toBe(5);
   });
 });
