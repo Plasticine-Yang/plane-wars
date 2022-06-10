@@ -1,7 +1,15 @@
 import { getElementRelativePositionInContainer } from '@/utils';
 import { Application } from 'pixi.js';
 import { APP_BACKGROUND_COLOR } from '../constants';
-import { createPlane, Plane, PLANE_HEIGHT, PLANE_WIDTH } from '../plane';
+import {
+  createEnemeyPlane,
+  createPlane,
+  EnemyPlane,
+  EnemyPlaneOptions,
+  Plane,
+  PLANE_HEIGHT,
+  PLANE_WIDTH,
+} from '../plane';
 
 const APP_WIDTH = document.documentElement.clientWidth;
 const APP_HEIGHT = document.documentElement.clientHeight;
@@ -26,12 +34,30 @@ const initPlane = () => {
   return plane;
 };
 
+/**
+ * @description 初始化创建敌军飞机
+ * @param count 创建几架敌军飞机
+ */
+const initEnemyPlane = (count = 3, options?: EnemyPlaneOptions) => {
+  const enemyPlanes: EnemyPlane[] = [];
+
+  for (let i = 0; i < count; i++) {
+    enemyPlanes.push(createEnemeyPlane(Math.random() * APP_WIDTH, 0, options));
+  }
+
+  return enemyPlanes;
+};
+
 const initGame = () => {
   // 初始化飞机的渲染逻辑
   const plane = initPlane();
 
+  // 初始化创建 3 架敌军飞机
+  const enemyPlanes = initEnemyPlane();
+
   return {
     plane,
+    enemyPlanes,
   };
 };
 
@@ -47,6 +73,25 @@ const startPlane = (plane: Plane) => {
   });
 };
 
+/**
+ * @description 敌军飞机相关的逻辑
+ * @param enemyPlanes 敌军飞机数组
+ */
+const startEnemyPlane = (enemyPlanes: EnemyPlane[]) => {
+  setInterval(() => {
+    // 每次随机生成不超过五架飞机
+    const newEnemyPlanes = initEnemyPlane(Math.floor(Math.random() * 5));
+    enemyPlanes.push(...newEnemyPlanes);
+  }, 2000);
+
+  // 遍历所有敌军飞机让它们移动
+  pixiApp.ticker.add(() => {
+    enemyPlanes.forEach((enemyPlane) => {
+      enemyPlane.move();
+    });
+  });
+};
+
 document.body.appendChild(pixiApp.view);
 
-export { initGame, startPlane };
+export { initGame, startPlane, startEnemyPlane };
