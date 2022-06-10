@@ -1,4 +1,5 @@
-import { Bullet } from '../bullet';
+import { getElementRelativePositionInContainer } from '@/utils';
+import { Bullet, BULLET_HEIGHT, BULLET_WIDTH } from '../bullet';
 
 export const PLANE_WIDTH = 110;
 export const PLANE_HEIGHT = 98;
@@ -17,6 +18,7 @@ export class Plane {
   bullets: Bullet[] = [];
   bulletMoveSpeed: number;
   fireFreq: number;
+  private fireTimer?: number;
 
   constructor(x: number, y: number, options?: PlaneOptions) {
     this.x = x;
@@ -46,7 +48,17 @@ export class Plane {
    * @description 开火 -- 生成子弹
    */
   fire() {
-    this.bullets.push(new Bullet(this.x, this.y, this.bulletMoveSpeed));
+    const { x: offsetX, y: offsetY } = getElementRelativePositionInContainer(
+      PLANE_WIDTH,
+      PLANE_HEIGHT,
+      BULLET_WIDTH,
+      BULLET_HEIGHT,
+      0.5,
+      0
+    );
+    this.bullets.push(
+      new Bullet(this.x + offsetX, this.y + offsetY, this.bulletMoveSpeed)
+    );
   }
 
   /**
@@ -57,12 +69,18 @@ export class Plane {
   }
 
   /**
-   * @description 飞机运行时的逻辑
+   * @description 开启发射子弹
    */
-  run() {
-    // 不断开炮
-    setInterval(() => {
+  startFire() {
+    this.fireTimer = setInterval(() => {
       this.fire();
-    }, this.fireFreq);
+    }, this.fireFreq) as unknown as number;
+  }
+
+  /**
+   * @description 停止发射子弹
+   */
+  stopFire() {
+    clearInterval(this.fireTimer);
   }
 }

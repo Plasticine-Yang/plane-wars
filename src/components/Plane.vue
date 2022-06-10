@@ -1,32 +1,18 @@
 <script setup lang="ts">
 import playerPlaneImg from '@/assets/plane/player-plane.png';
-import { inject, onMounted, onUnmounted, reactive, toRefs } from 'vue';
+import { onMounted, onUnmounted, PropType } from 'vue';
 import { Plane } from '@/pixi-game';
-import { PLANE_WIDTH, PLANE_HEIGHT } from '@/pixi-game/constants';
-import { getElementRelativePositionInContainer } from '@/utils';
 
-const APP_WIDTH = inject<number>('APP_WIDTH')!;
-const APP_HEIGHT = inject<number>('APP_HEIGHT')!;
-
-defineProps({
+const { plane } = defineProps({
   planeImg: {
     type: String,
     default: playerPlaneImg,
   },
+  plane: {
+    type: Object as PropType<Plane>,
+    required: true,
+  },
 });
-
-// 飞机初始坐标 -- 水平方向在屏幕中间 垂直方向在屏幕从上往下 80% 处
-const { x: planeInitX, y: planeInitY } = getElementRelativePositionInContainer(
-  APP_WIDTH,
-  APP_HEIGHT,
-  PLANE_WIDTH,
-  PLANE_HEIGHT,
-  0.5,
-  0.8
-);
-
-const plane = reactive(new Plane(planeInitX, planeInitY, 10));
-const { x, y } = toRefs(plane);
 
 /**
  * @description 处理飞机方向移动
@@ -64,6 +50,6 @@ onUnmounted(() => {
 
 <template>
   <Container>
-    <Sprite :texture="planeImg" :x="x" :y="y" />
+    <Sprite :texture="planeImg" :x="plane.x" :y="plane.y" />
   </Container>
 </template>

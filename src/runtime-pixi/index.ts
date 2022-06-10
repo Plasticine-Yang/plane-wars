@@ -12,6 +12,9 @@ const { createApp } = createRenderer<Container, Container>({
       case 'Sprite':
         element = new Sprite();
         break;
+      case 'Text':
+        element = new Text();
+        break;
       default:
         throw new Error(
           `The type of ${type} does not exist or has not implemented its rendering logic`
