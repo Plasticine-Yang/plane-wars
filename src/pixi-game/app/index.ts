@@ -35,14 +35,12 @@ const initGame = () => {
   };
 };
 
+/**
+ * @description 控制初始化飞机后飞机的行为
+ * @param plane 响应式飞机对象
+ */
 const startPlane = (plane: Plane) => {
   plane.startFire();
-
-  setTimeout(() => {
-    plane.stopFire();
-    plane.fireFreq = 100;
-    plane.startFire();
-  }, 3000);
 
   pixiApp.ticker.add(() => {
     plane.moveBullets();
