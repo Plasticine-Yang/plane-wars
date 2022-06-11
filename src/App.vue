@@ -2,7 +2,12 @@
 import Plane from '@/components/Plane.vue';
 import Bullet from '@/components/Bullet.vue';
 import { provide, reactive } from 'vue';
-import { initGame, startPlane, startEnemyPlane } from '@/pixi-game';
+import {
+  initGame,
+  startPlane,
+  startEnemyPlane,
+  startCollisionDetect,
+} from '@/pixi-game';
 import EnemyPlane from './components/EnemyPlane.vue';
 
 const APP_WIDTH = document.documentElement.clientWidth;
@@ -17,6 +22,7 @@ const enemyPlanes = reactive(rawEnemyPlanes);
 
 startPlane(plane);
 startEnemyPlane(enemyPlanes);
+startCollisionDetect(plane, enemyPlanes);
 </script>
 
 <template>

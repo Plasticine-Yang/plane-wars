@@ -1,6 +1,7 @@
 import { getElementRelativePositionInContainer } from '@/utils';
 import { Application } from 'pixi.js';
 import { APP_BACKGROUND_COLOR } from '../constants';
+import { collisionDetect } from '../logic';
 import {
   createEnemeyPlane,
   createPlane,
@@ -92,6 +93,26 @@ const startEnemyPlane = (enemyPlanes: EnemyPlane[]) => {
   });
 };
 
+/**
+ * @description 在帧循环中检测我方飞机的子弹是否和敌军飞机碰撞
+ * @param plane 我方飞机
+ * @param enemyPlanes 敌军飞机
+ */
+const startCollisionDetect = (plane: Plane, enemyPlanes: EnemyPlane[]) => {
+  pixiApp.ticker.add(() => {
+    plane.bullets.forEach((bullet, bIndex) => {
+      enemyPlanes.forEach((enemyPlane, eIndex) => {
+        const isCollided = collisionDetect(bullet, enemyPlane);
+        if (isCollided) {
+          // 发生碰撞则将子弹和飞机删除
+          plane.bullets.splice(bIndex, 1);
+          enemyPlanes.splice(eIndex, 1);
+        }
+      });
+    });
+  });
+};
+
 document.body.appendChild(pixiApp.view);
 
-export { initGame, startPlane, startEnemyPlane };
+export { initGame, startPlane, startEnemyPlane, startCollisionDetect };
