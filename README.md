@@ -1,16 +1,37 @@
-# Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# Plane Wars
 
-## Recommended IDE Setup
+基于TDD思想开发的飞机大战游戏，使用vitest测试框架完成单元测试的编写
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+使用vue的自定义渲染器实现canvas环境中的渲染逻辑
 
-## Type Support For `.vue` Imports in TS
+使用pixi.js提供的API完成自定义渲染器接口的实现
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+将ui逻辑和业务逻辑解耦，提高开发效率
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+[![author](https://img.shields.io/badge/author-Plasticine--Yang-blue)](https://github.com/Plasticine-Yang)
+
+[![vite](https://img.shields.io/badge/build-vite-brightgreen)](https://vitejs.dev/)
+
+[![pixi.js](https://img.shields.io/badge/engine-pixi.js-red)](https://pixijs.com/)
+# Feature
+
+- 使用vue的自定义渲染器接口createRenderer实现一个在非DOM环境下的渲染器，实现方式参考runtime-dome
+- 学会pixi.js的基本使用
+- vitest测试框架的基本使用，基本的API使用，以及如何测试有定时器场景的业务逻辑
+- TDD测试驱动开发思想，每一个业务逻辑都会有相应的单元测试，并且是先编写单元测试，根据单元测试描述的场景去思考如何实现具体功能，单元测试的描述范围足够小，通过小步快走的方式逐步完善功能，由于步骤足够小，涉及的其他模块几乎没有，方便每个单元测试的调试
+- 将ui逻辑和业务逻辑解耦，摆脱以往的实现一个功能就要打开浏览器检查视图的逻辑来验证自己的业务逻辑是否正确的痛苦开发体验，这样还能够在添加新功能时很方便地验证是否有影响到之前实现的功能
+
+# How to run
+
+```shell
+pnpm i
+pnpm dev
+```
+
+# 教程
+
+掘金：[自定义vue渲染器，分离ui逻辑和业务逻辑，基于TDD思想实现一个飞机大战小游戏](https://juejin.cn/post/7107829079952326693/#heading-59)
+
