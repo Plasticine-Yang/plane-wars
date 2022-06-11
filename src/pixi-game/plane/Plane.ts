@@ -57,7 +57,9 @@ export class Plane {
       0
     );
     this.bullets.push(
-      new Bullet(this.x + offsetX, this.y + offsetY, this.bulletMoveSpeed)
+      new Bullet(this.x + offsetX, this.y + offsetY, {
+        speed: this.bulletMoveSpeed,
+      })
     );
   }
 

@@ -12,7 +12,7 @@ describe('Bullet', () => {
   );
 
   const createBullet = () => {
-    return new Bullet(bulletInitX, bulletInitY, 5);
+    return new Bullet(bulletInitX, bulletInitY, { speed: 5 });
   };
   it('move', () => {
     const bullet = createBullet();
